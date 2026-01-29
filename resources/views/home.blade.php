@@ -17,6 +17,20 @@
 
             <!-- Navigation Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Register -->
+                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 h-2"></div>
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Đăng ký tài khoản</h2>
+                        <a href="{{ route('register') }}" class="flex items-center p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-green-600 hover:text-green-700 font-medium">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Đăng ký
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Product Management -->
                 <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2"></div>
