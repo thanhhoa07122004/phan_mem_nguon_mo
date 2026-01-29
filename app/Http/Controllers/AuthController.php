@@ -26,4 +26,14 @@ class AuthController extends Controller
         }
         return redirect('/auth/login')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
     }
+    public function age()
+    {
+        return view("auth.age");
+    }
+    public function storeAge(Request $request)
+    {
+         session(['age' => $request->age]);
+
+        return redirect()->route('home');
+    }
 }
