@@ -20,31 +20,35 @@
                 <div class="p-8 md:p-12">
                     <!-- Product Info Card -->
                     <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-8 mb-8">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <!-- Product ID -->
-                            <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow">
-                                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Mã sản phẩm</label>
-                                <p class="text-4xl font-bold text-purple-600">{{ $id }}</p>
-                            </div>
-
-                            <!-- Additional Info -->
-                            <div class="flex flex-col justify-center p-6 bg-white rounded-lg shadow">
-                                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">Trạng thái</label>
-                                <div class="inline-flex items-center">
-                                    <span class="inline-flex items-center justify-center px-4 py-2 rounded-full text-lg font-semibold bg-green-100 text-green-700">
-                                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        @if($product)
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <!-- Product ID -->
+                                <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow">
+                                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
-                                        Hoạt động
-                                    </span>
+                                    </div>
+                                    <label class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Mã sản phẩm</label>
+                                    <p class="text-4xl font-bold text-purple-600">{{ $id }}</p>
+                                </div>
+
+                                <!-- Additional Info -->
+                                <div class="flex flex-col justify-center p-6 bg-white rounded-lg shadow">
+                                    <label class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">Trạng thái</label>
+                                    <div class="inline-flex items-center">
+                                        <span class="inline-flex items-center justify-center px-4 py-2 rounded-full text-lg font-semibold {{ $product['quantity'] > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            {{ $product['quantity'] > 0 ? 'Còn hàng' : 'Hết hàng' }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="p-8 text-center text-red-600 font-semibold">Không tìm thấy sản phẩm với mã {{ $id }}.</div>
+                        @endif
                     </div>
 
                     <!-- Details Table -->
@@ -52,18 +56,32 @@
                         <h2 class="text-2xl font-bold text-gray-900 mb-4">Thông tin chi tiết</h2>
                         <table class="w-full">
                             <tbody class="divide-y divide-gray-300">
-                                <tr class="hover:bg-purple-50">
-                                    <td class="px-4 py-3 font-semibold text-gray-700">Loại sản phẩm</td>
-                                    <td class="px-4 py-3 text-gray-600">Sản phẩm tiêu chuẩn</td>
-                                </tr>
-                                <tr class="hover:bg-purple-50">
-                                    <td class="px-4 py-3 font-semibold text-gray-700">Nhà cung cấp</td>
-                                    <td class="px-4 py-3 text-gray-600">Có sẵn</td>
-                                </tr>
-                                <tr class="hover:bg-purple-50">
-                                    <td class="px-4 py-3 font-semibold text-gray-700">Tạo lúc</td>
-                                    <td class="px-4 py-3 text-gray-600">{{ date('d/m/Y H:i:s') }}</td>
-                                </tr>
+                                @if($product)
+                                    <tr class="hover:bg-purple-50">
+                                        <td class="px-4 py-3 font-semibold text-gray-700">Tên sản phẩm</td>
+                                        <td class="px-4 py-3 text-gray-600">{{ $product['name'] }}</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-50">
+                                        <td class="px-4 py-3 font-semibold text-gray-700">Số lượng</td>
+                                        <td class="px-4 py-3 text-gray-600">{{ $product['quantity'] }}</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-50">
+                                        <td class="px-4 py-3 font-semibold text-gray-700">Giá</td>
+                                        <td class="px-4 py-3 text-gray-600">{{ number_format($product['price'], 0, ',', '.') }} VND</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-50">
+                                        <td class="px-4 py-3 font-semibold text-gray-700">Mô tả</td>
+                                        <td class="px-4 py-3 text-gray-600">{{ $product['description'] }}</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-50">
+                                        <td class="px-4 py-3 font-semibold text-gray-700">Tạo lúc</td>
+                                        <td class="px-4 py-3 text-gray-600">{{ date('d/m/Y H:i:s') }}</td>
+                                    </tr>
+                                @else
+                                    <tr class="hover:bg-purple-50">
+                                        <td colspan="2" class="px-4 py-3 text-red-600">Không có dữ liệu sản phẩm.</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

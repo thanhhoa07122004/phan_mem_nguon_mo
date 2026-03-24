@@ -15,28 +15,25 @@ class CheckAge
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->is('auth/age','auth/age/*')) {
+        // 1. Cho phép đi qua nếu đang ở trang nhập tuổi hoặc đang gửi form lưu tuổi
+        if ($request->is('auth/age', 'auth/storeAge')) {
             return $next($request);
         }
-        // Lấy giá trị tuổi từ session hoặc từ input hiện tại
-      $age = $request->session()->get('age', $request->input('age'));
 
-      // Kiểm tra nếu tuổi không phải là số hợp lệ
-      if (is_array($age)) {
-        $age = null;
-      } elseif ($age !== null) {
-        $age = trim((string) $age);
-      }
+        // 2. Lấy giá trị tuổi từ session
+        $age = $request->session()->get('age');
 
-      // Nếu tuổi không được cung cấp hoặc không phải là số nguyên hợp lệ
-      if ($age === null || $age === '' || filter_var($age, FILTER_VALIDATE_INT) === false) {
-        return redirect()->route('age')->with('error', 'Vui lòng nhập tuổi hợp lệ.');
-      }
+        // 3. Nếu chưa nhập tuổi -> Chuyển hướng sang trang nhập tuổi
+        if ($age === null || $age === '') {
+            return redirect('/auth/age');
+        }
 
-      $age = (int) $age;
-      if ($age < 18) {
-        return redirect()->route('age')->with('error', 'Bạn phải đủ 18 tuổi trở lên để truy cập trang này.');
-      }
+        // 4. Nếu đã nhập nhưng không phải số hợp lệ hoặc nhỏ hơn 18 -> Cấm truy cập
+        if (filter_var($age, FILTER_VALIDATE_INT) === false || (int) $age < 18) {
+            return response('Không được phép truy cập', 403);
+        }
+
+        // 5. Hợp lệ (>= 18) -> Cho phép đi tiếp vào trang chủ
         return $next($request);
     }
 }

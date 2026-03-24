@@ -60,6 +60,28 @@
                     </div>
                 </div>
 
+                <!-- Category Management -->
+                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <div class="bg-gradient-to-r from-yellow-500 to-amber-500 h-2"></div>
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Quản lý danh mục</h2>
+                        <div class="space-y-3">
+                            <a href="{{ route('category.index') }}" class="flex items-center p-3 bg-yellow-50 hover:bg-yellow-100 rounded-lg transition-colors text-yellow-600 hover:text-yellow-700 font-medium">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18"></path>
+                                </svg>
+                                Xem danh sách danh mục
+                            </a>
+                            <a href="{{ route('category.create') }}" class="flex items-center p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-green-600 hover:text-green-700 font-medium">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                Thêm mới danh mục
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Student Info -->
                 <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="bg-gradient-to-r from-orange-500 to-red-500 h-2"></div>
